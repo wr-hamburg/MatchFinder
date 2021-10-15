@@ -36,10 +36,10 @@ def file():
     if helper.validate_file(uploaded_file, app):
         teilnehmer_name = request.form.get('teilnehmer_name', None)
         themen_name = request.form.get('themen_name', None)
-        if themen_name == None:
+        if teilnehmer_name:
             teilnehmer = txt_parser.array_from_teilnehmer(uploaded_file)
             number_saved, error = database_helper.save_teilnehmer(teilnehmer, teilnehmer_name)
-        elif teilnehmer_name == None:
+        elif themen_name:
             themen = txt_parser.array_from_themen(uploaded_file)
             number_saved = database_helper.save_themen(themen, themen_name)
         return redirect(url_for('upload.index', items_saved=number_saved))

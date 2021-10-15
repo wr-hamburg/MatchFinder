@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. venv/bin/activate
+. .venv/bin/activate
 
 export FLASK_APP=matchFinder
 

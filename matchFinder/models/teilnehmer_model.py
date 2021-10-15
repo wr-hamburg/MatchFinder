@@ -14,4 +14,5 @@ class Teilnehmer(db.Model):
 	praeferenzen = db.relationship("Praeferenz", cascade="all,delete", backref="teilnehmer", lazy=True)
 	first_name = db.Column(db.String(80), nullable=False)
 	last_name = db.Column(db.String(80))
-	matr_nr = db.Column(db.Integer, unique=True)
+	# since all students are collected within a single table, the Matrikel may not be unique, since students may use this tool for different courses
+	matr_nr = db.Column(db.Integer, unique=False)
