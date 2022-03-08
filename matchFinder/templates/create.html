@@ -31,7 +31,7 @@
 					<template v-else>
   						Unterthema.
 					</template></p>
-        			<p>Die Mindesttimmen dürfen nicht die Anzahl der Unterthemen überschreiten.</p>
+        			<p>Die Mindesttimmen dürfen nicht die Anzahl der Unterthemen oder 10 überschreiten.</p>
       			</div>
       			<div class="modal-footer">
         			<button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
@@ -194,7 +194,7 @@
 			*/
 			onChangeMaxPer(event) {
 				this.update()
-				if (event.target.value <= 0) {
+				if (event.target.valueAsNumber <= 0) {
 					this.max_per = 1
 				}
 			},
@@ -206,56 +206,36 @@
 			* @param {event} event the click event
 			*/
 			onChangeMinVotes(event) {
-				
-
-
-				console.clear()
-				console.log("START");
-				console.log("event.target.value: " + event.target.value);
-				console.log("numberOfThemen: " + this.numberOfThemen);
-				console.log("this.min_votes: " + this.min_votes);
-				console.log(typeof this.numberOfThemen);
-				console.log(typeof event.target.value);
-				console.log(typeof event.target.valueAsNumber);
-				console.log(typeof this.min_votes);
-				console.log("BEFORE UPDATE");
 				this.update()
-				console.log("AFTER UPDATE");
-				console.log("event.target.value: " + event.target.value);
-				console.log("numberOfThemen: " + this.numberOfThemen);
-				console.log("this.min_votes: " + this.min_votes);
-				console.log("BEFORE IF");
 				if (event.target.valueAsNumber <= 0) {
-					console.log("IF 1");
 					this.min_votes = 1
 				} else if (event.target.valueAsNumber > this.numberOfThemen) {
-					console.log("IF 2");
-					console.log("event.target.value: " + event.target.value);
-					console.log("numberOfThemen: " + this.numberOfThemen);
 					$('#myModal').modal("show")
-					//this.min_votes = this.numberOfThemen
+					if (this.numberOfThemen > 10){
+						this.min_votes = 10
+					}
+					else{
+						this.min_votes = this.numberOfThemen
+					}
 				} else if (event.target.valueAsNumber > 10) {
-					console.log("IF 3");
 					this.min_votes = 10
 				}
-				console.log("AFTER IF");
-				console.log("event.target.value: " + event.target.value);
-				console.log("numberOfThemen: " + this.numberOfThemen);
-				console.log("this.min_votes: " + this.min_votes);
-				console.log("END");
 			},
 			/**
 			* updates the within_limit value.
 			* within_limit is always true when the verteilung is not protected
 			* otherwise it depends on wether number of teilnehmer is less or equal
 			* the number of themen times max_per
+			*
+			* USE + before a value to convert it to INT (i.e. +selectedThemenValue.value)
+			*
 			*/
 			update(){
 				var selectedTeilnehmerValue = document.getElementById("teilnehmer")
 				var selectedThemenValue = document.getElementById("thema")
 				if (selectedThemenValue != null) {
-					selectedThemenValue = selectedThemenValue.value
-					this.numberOfThemen = document.getElementById("number_themen" + selectedThemenValue).value
+					selectedThemenValue = +selectedThemenValue.value
+					this.numberOfThemen = +document.getElementById("number_themen" + selectedThemenValue).value
 				}
 				if (selectedTeilnehmerValue != null && {{teilnehmer|length }} > 0) {
 					selectedTeilnehmerValue = selectedTeilnehmerValue.value
@@ -269,7 +249,7 @@
 		},
 		/**
 		* runs update function on being mounted
-		*/
+		*/	
 		mounted() {
 			this.update()
 			if (this.numberOfTeilnehmer == 0) {
