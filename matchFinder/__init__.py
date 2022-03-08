@@ -121,5 +121,5 @@ with create_app().app_context():
     app.logger.handlers = gunicorn_logger.handlers
     app.logger.setLevel(gunicorn_logger.level)
 
-    from . import database_helper
-    database_helper.init_db()
+    # from . import database_helper
+    # database_helper.init_db()

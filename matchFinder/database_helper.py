@@ -25,7 +25,7 @@ def init_db():
 	BE CAREFUL WHEN USING THIS IN PRODUCTION AS ALL DATA IS LOST AFTERWARDS.
 	"""
 
-	#reset_db() # <-- DANGER
+	# reset_db() # <-- DANGER
 
 	rows = password_model.Password.query.count()
 	if rows == 0:
