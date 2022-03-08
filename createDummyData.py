@@ -16,7 +16,7 @@ def createDummyStineList(amountOfStudents):
         line=str(id)+'\t'+str(matrikelnummmer)+'\t'+nachname+'\t'+vorname+'\t'
         users.append(line)
 
-    with open('stineDummyList.txt','w') as file:
+    with open('dummy_STINE_List.txt','w') as file:
         for line in users:
             file.write(line+'\n')
 
@@ -31,9 +31,9 @@ def createDummyTopics(amountOfTopics):
         line=topicName+','+date.strftime('%d.%m.%Y')+','+name
         topics.append(line)
 
-    with open('dummyTopicsList.csv','w') as file:
+    with open('dummy_TOPICS_List.csv','w') as file:
         for line in topics:
             file.write(line+'\n')
 
-# createDummyStineList(20)
-# createDummyTopics(20)
+createDummyStineList(20)
+createDummyTopics(20)

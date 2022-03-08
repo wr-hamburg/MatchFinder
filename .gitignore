@@ -221,3 +221,6 @@ matchfinder.db
 poll.csv
 matchFinder/config.py
 matchFinder/config.py
+dummy_STINE_List.txt
+dummy_TOPICS_List.csv
+.vscode/launch.json
