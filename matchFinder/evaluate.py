@@ -51,7 +51,8 @@ def from_id(verteilung_id):
         praeferenz = praeferenz.split(',')
         censored_matr_nr = helper.build_cencored_matr(teil.matr_nr)
         name = teil.first_name + " " + teil.last_name if teil.last_name != "" else teil.first_name
-        concat_name = name + " " + censored_matr_nr
+        #for now don't display matr_nr at all
+        concat_name = name #+ " " + censored_matr_nr
         local_teilnehmer_pref = helper.duplicate_teilnehmer_praefs(
             [concat_name] + praeferenz, max_per)
         teilnehmer_pref.append(local_teilnehmer_pref)

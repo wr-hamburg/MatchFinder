@@ -23,7 +23,8 @@ def index(verteilung_id):
 	array = []
 	for teilnehmer in verteilung.teilnehmer.teilnehmer:
 		local_object = {}
-		local_object["name"] = teilnehmer.first_name + " " + teilnehmer.last_name + " " + helper.build_cencored_matr(teilnehmer.matr_nr)
+		#for now dont show matr_nr at all
+		local_object["name"] = teilnehmer.first_name + " " + teilnehmer.last_name# + " " + helper.build_cencored_matr(teilnehmer.matr_nr)
 		praeferenz = database_helper.get_praeferenz(teilnehmer.id, verteilung.id)
 		local_object["praeferenz"] = praeferenz.praeferenzen.split(",") if praeferenz != None else " "
 		array.append(local_object)
