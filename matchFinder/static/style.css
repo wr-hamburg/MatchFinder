@@ -110,3 +110,7 @@ body {
 .noIncDecButtons[type=number] {
   -moz-appearance: textfield;
 }
+
+.setPriorities{
+  padding-bottom: 100px;
+}

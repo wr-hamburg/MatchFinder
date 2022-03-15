@@ -195,7 +195,8 @@ def convert_preferences(praeferenzen):
         if praef == "Keine Präferenz":
             indices_of_no_praefs.append(index)
 
-    possible_number = 1
+    #increased starting number to 11 (10 is lowest possible manual input pref) so all no prefs are lower than a set pref
+    possible_number = 11
     random.shuffle(indices_of_no_praefs)
     for index in indices_of_no_praefs:
         while True:

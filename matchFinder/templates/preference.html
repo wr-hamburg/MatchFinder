@@ -8,7 +8,7 @@
 <div id="app">
 	<h5 v-if="neededAnswers == 1">Hallo {{teilnehmer.first_name}}, bitte gebe deine Präferenzen an. Du musst mindestens eine Angabe machen.</h5>
 	<h5 v-else>Hallo {{teilnehmer.first_name}}, bitte gebe deine Präferenzen an. Du musst mindestens ${neededAnswers} Angaben machen.</h5>
-	<form method=post action="{{ url_for('preference.save') }}" enctype=multipart/form-data>
+	<form class="setPriorities" method=post action="{{ url_for('preference.save') }}" enctype=multipart/form-data>
 		<div class="col-lg-8 col-md-10 col-sm-12 col-xs-12">
 			{% for thema in themen %}
 			<div class="input-group mb-2">
