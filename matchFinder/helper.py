@@ -7,6 +7,7 @@ from functools import reduce
 import random
 import copy
 import os
+import re
 
 def convert_praef_to_number(praef):
     """
@@ -195,8 +196,8 @@ def convert_preferences(praeferenzen):
         if praef == "Keine Präferenz":
             indices_of_no_praefs.append(index)
 
-    #increased starting number to 11 (10 is lowest possible manual input pref) so all no prefs are lower than a set pref
-    possible_number = 11
+    #increased starting number to 100 (10 is lowest possible manual input pref) so all no prefs are lower than a set pref
+    possible_number = 100
     random.shuffle(indices_of_no_praefs)
     for index in indices_of_no_praefs:
         while True:
@@ -331,3 +332,32 @@ def create_txt(data):
                     map(lambda c: c[0].split(" (**")[0], filter(lambda x: x[1] == thema, data)))))))
         rtn = rtn[:-2] + "\n"
     return rtn
+
+def parseTopicsMarkdownWithRegex(regexInput,markdown):
+    """
+    uses regex to find topics and tutors in a markdown
+
+    Parameter
+    ----------
+    markdown : string
+        input from the website
+
+    Returns
+    ----------
+    list of Dicts of topics
+    """
+    markdown=markdown.replace('\r','\n')
+    markdown=markdown.split('\n')
+
+    topicsList=[]
+    # regex='(?:\*\s*)(.*?)(?:\(\()(.*)(?:\)\))'
+    regex=regexInput
+
+    for line in markdown:
+        found=re.findall(regex,line)
+        if found:
+            topicDict={"thema_name":found[0][0].strip(), "zeit":'', "betreuer":found[0][1].strip()}
+            topicsList.append(topicDict)
+
+    return topicsList
+

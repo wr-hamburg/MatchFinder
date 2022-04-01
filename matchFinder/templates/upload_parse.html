@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}Markdown hochladen/parsen{% endblock %}
+
+{% block header %}Markdown hochladen/parsen{% endblock %}
+
+{% block body %}
+
+<div>
+	<div class="col-lg-8 col-md-10 col-sm-12 col-xs-12 mb-3">
+		<form id="markdownForm" method="POST" action="{{ url_for('upload.parse') }}">
+			<div class="input-group mb-2">
+				<div class="input-group-prepend w-25">
+					<span class="input-group-text w-100">Name der Themenliste</span>
+				</div>
+				<input class="form-control" id="themen_name" name="themen_name" placeholder="erforderlich" required="" size="20" type="text" value="">
+			</div>
+			<div class="input-group mb-2">
+				<div class="input-group-prepend w-25">
+					<span class="input-group-text w-100">Regex</span>
+				</div>
+				<input class="form-control" id="regex" name="regex" required="" size="20" type="text" value="(?:\*\s*)(.*?)(?:\(\()(.*)(?:\)\))">
+			</div>
+			<p>Create, test, validate your regex here: <a href="https://regex101.com/">regex101.com</a><br/>Group 1 has to be the topic, Group 2 has to be the tutor in order for the data to be properly processed.</p>
+				<textarea form="markdownForm" name="markdown" id="textarea_parsing"></textarea>
+			<br/>
+			<input class="btn btn-primary" type="submit" value="Verarbeiten">
+		</form>
+
+
+
+</div>
+
+
+{% endblock %}

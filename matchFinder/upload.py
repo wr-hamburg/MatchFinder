@@ -74,6 +74,27 @@ def themen_manually():
         return render_template('upload_themen.html', form=themenform)
     return redirect(url_for('upload.index'))
 
+@bp.route('/parse', methods=['GET','POST'])
+def parse():
+    if request.method == 'POST':
+        themenList=helper.parseTopicsMarkdownWithRegex(request.form['regex'],request.form['markdown'])
+        data={'themen_name': request.form['themen_name'],'themen':themenList}
+
+        rtn = database_helper.save_themen(
+            data['themen'],
+            request.form['themen_name'])
+        return redirect(url_for('upload.index', items_saved=rtn))
+
+        # ImmutableMultiDict([('themen_name', 'Test'), ('markdown', '===== Zeitplan und Themen =====\r\n\r\nDie meisten Paper sind aus dem Uni-Netz aufrufbar und werden nach dem Semesterstart zur Verfüngung gestellt.\r\nDie Themen umfassen Kompression, Dateisysteme, Daten in wissenschaftlichen Simulation, Compiler, LLVM, OpenMP, etc.\r\n\r\n  * Living on the Edge: Efficient Handling of LargeScale Sensor Data ((Anna Fuchs))\r\n  * Evolution of the ROOT Tree I/O ((Anna Fuchs))\r\n  * Enabling Random Access in Universal Compressors ((Anna Fuchs))\r\n  * Characterization of data compression across CPU platforms and accelerators ((Anna Fuchs))\r\n  * Supporting Data Compression in PnetCDF ((Anna Fuchs))\r\n  * Assessing the Overhead of Offloading CompressionTasks ((Anna Fuchs))\r\n  * An Overview of the HDF5 Technology Suite and its Applications ((Anna Fuchs))\r\n  * Compressing atmospheric data into its real information content ((Anna Fuchs))\r\n  * Massively-Parallel Lossless Data Decompression ((Anna Fuchs)) \r\n  * High Performance Parallel I/O and In-Situ Analysisin the WRF Model with ADIOS2 ((Anna Fuchs))\r\n  * A Performance Study of Lustre File SystemChecker: Bottlenecks and Potentials ((Anna Fuchs))')])
+
+        # rtn = database_helper.save_themen(
+        #     dataDict,
+        #     nameString)
+
+        return redirect(url_for('upload.index'))
+    else:
+        return render_template('upload_parse.html')
+
 @bp.route('/teilnehmer_manually', methods=['POST'])
 def teilnehmer_manually():
     """

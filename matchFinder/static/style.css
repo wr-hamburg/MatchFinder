@@ -114,3 +114,8 @@ body {
 .setPriorities{
   padding-bottom: 100px;
 }
+
+#textarea_parsing{
+  width:800px;
+  height:300px;
+}
