@@ -119,3 +119,7 @@ body {
   width:800px;
   height:300px;
 }
+
+.th_vertical{
+  writing-mode: vertical-rl;
+}

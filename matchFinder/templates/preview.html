@@ -14,7 +14,11 @@
 			<tr>
 				<th>Name des Teilnehmers</th>
 				{% for thema in themen.themen%}
-				<th>{{thema.thema_name}}</th>
+					{% if thema.thema_name|length > 30 %}
+						<th class="th_vertical" title="{{thema.thema_name}}">{{thema.thema_name[:27]}}...</th>
+					{%else%}
+						<th class="th_vertical" title="{{thema.thema_name}}">{{thema.thema_name}}</th>
+					{% endif %}
 				{% endfor %}
 			</tr>
 		</thead>
