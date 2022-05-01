@@ -51,7 +51,7 @@
 		</thead>
 		<tbody>
 			{% for teilnehmer_list in teilnehmer_lists %}
-			<tr>
+			<tr class="clickableTR">
 				<td data-toggle="collapse" data-target="#subtable_teilnehmer_{{teilnehmer_list.id}}" class="clickable">{{teilnehmer_list.id}}</td>
 				<td data-toggle="collapse" data-target="#subtable_teilnehmer_{{teilnehmer_list.id}}" class="clickable">{{teilnehmer_list.name}}</td>
 				<td>
@@ -108,7 +108,7 @@
 
 			{% for thema_list in thema_lists %}
 
-			<tr>
+			<tr class="clickableTR">
 				<td data-toggle="collapse" data-target="#subtable_thema_{{thema_list.id}}" class="clickable">{{thema_list.id}}</td>
 				<td data-toggle="collapse" data-target="#subtable_thema_{{thema_list.id}}" class="clickable">{{thema_list.name}}</td>
 				<td>
