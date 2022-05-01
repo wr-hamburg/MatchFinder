@@ -12,7 +12,7 @@
 	<table class="table table-striped table-sm">
 		<thead>
 			<tr>
-				<th>Name des Teilnehmers</th>
+				<th style="width:200px">Name des Teilnehmers</th>
 				{% for thema in themen.themen%}
 					{% if thema.thema_name|length > 30 %}
 						<th class="th_vertical" title="{{thema.thema_name}}">{{thema.thema_name[:27]}}...</th>
@@ -27,9 +27,21 @@
 
 			<tr>
 				<td>{{praeferenz.name}}</td>
-				{% for praef in praeferenz.praeferenz %}
-				<td>{{praef}}</td>
-				{% endfor %}
+				{% if praeferenz.praeferenz | length > 1 %}
+					{% for praef in praeferenz.praeferenz %}
+						{% if praef == "Veto" %}
+							<td>V</td>
+						{%else%}
+							<td>{{praef}}</td>
+						{% endif %}
+<!-- 
+					<td>{{praef}}</td> -->
+					{% endfor %}
+				{%else%}
+					{% for thema in themen.themen%}
+						<td>-</td>
+					{% endfor %}
+				{% endif %}
 			</tr>
 
 			{% endfor %}

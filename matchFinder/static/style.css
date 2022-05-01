@@ -121,5 +121,6 @@ body {
 }
 
 .th_vertical{
-  writing-mode: vertical-rl;
+  writing-mode: sideways-lr;
+  width:30px;
 }
